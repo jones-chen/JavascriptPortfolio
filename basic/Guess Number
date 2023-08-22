@@ -1,0 +1,48 @@
+// 遊戲-猜數字
+// 玩法：莊家事先指定介於 1-100 之間的數字。接下來挑戰者會開始猜數字，挑戰者說出數字以後，莊家會回答「太小了」或「太大了」，直到挑戰者猜中為止。
+// 例如：
+// 正確數字為： 67
+// 第 1 回合，挑戰者猜 3，莊家回答：太小了
+// 第 2 回合，挑戰者猜 87，莊家回答：太大了
+// 第 3 回合，挑戰者猜 50，莊家回答：太小了
+// ⋯⋯以此類推，直到猜中為止。
+
+//此版本是限制電腦猜的數字為 最大數字與最小數字的中間值
+//guessNum =  Math.round((minNum + maxNum)/2)
+
+//---------------------------------------------------
+// 宣告與設定變數
+let answer = Math.floor(Math.random() * 100) + 1   // 答案： 1-100 隨機整數
+let maxNum = 100   //範圍最大值：100
+let minNum = 1     //範圍最小值：1
+let roundNum = 0   //回合數
+let guessNum
+
+// 先公布答案
+console.log(`答案是 ${answer}`)
+// 電腦猜題
+while (true){
+  roundNum ++    // 回合數+1
+  guessNum =  Math.round((minNum + maxNum)/2)    //猜測數字： 範圍最小值 與 範圍最大值 的一半 
+  
+  //IF  (猜測數字 == 答案)：
+  if (guessNum === answer){           
+    console.log(`第 ${roundNum} 回合，挑戰者猜 ${guessNum}，莊家回答：恭喜答對！`)  //恭喜猜對了！ 
+    break  //停止迴圈
+
+  // ELSE IF  (猜測數字 > 答案) ： 
+  } else if (guessNum > answer){
+    console.log(`第 ${roundNum} 回合，挑戰者猜 ${guessNum}，莊家回答：太大了！`)
+    maxNum = guessNum-1  //更新範圍最大值：猜數字 - 1
+
+  // ELSE IF  (猜測數字 < 答案)
+  } else if (guessNum < answer){
+    console.log(`第 ${roundNum} 回合，挑戰者猜 ${guessNum}，莊家回答：太小了！`)
+    minNum = guessNum+1   //更新範圍最小值：猜數字 + 1
+ 
+  // ELSE ： 有問題，須回報！ 
+  } else {
+    console.log('有問題！趕緊回報！')
+    break //停止迴圈 
+  }
+}
